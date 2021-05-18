@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="bai6.css">
+</head>
+
+<body>
+    <span id="vnclock"></span>
+    <h1>TODO List</h1>
+    <input type="text" id="name">
+    <select id="select">
+        <option>TODO</option>
+        <option>DONE</option>
+       
+    </select><br>
+    <button id="btn_them">thêm</button>
+    <table align="center" id="table">
+        <tr>
+            <td>Name</td>
+            <td>status</td>
+            <td>Time</td>
+        </tr>
+    </table>
+
+    <table align="center" id="table1">
+
+    </table>
+
+    <script>
+        //Có hai hàm hẹn giờ trong JavaScript: setTimeout() và setInterval().
+        window.setTimeout("showTime()", 1000);
+
+        function getVNTime() {
+            var time = new Date();
+            var hr = time.getHours();
+            var min = time.getMinutes();
+            var sec = time.getSeconds();
+            hr = ((hr < 10) ? "0" : "") + hr;
+            min = ((min < 10) ? "0" : "") + min;
+            sec = ((sec < 10) ? "0" : "") + sec;
+            return +hr + ":" + min + ":" + sec;
+        }
+
+        function showTime() {
+            var vnclock = document.getElementById("vnclock");
+            if (vnclock != null)
+                vnclock.innerHTML = getVNTime();
+            setTimeout("showTime()", 1000);
+        }
+
+        var method = {
+            create: function() {
+
+                var time = new Date();
+                var hr = time.getHours();
+                var min = time.getMinutes();
+                var sec = time.getSeconds();
+                hr = ((hr < 10) ? "0" : "") + hr;
+                min = ((min < 10) ? "0" : "") + min;
+                sec = ((sec < 10) ? "0" : "") + sec;
+                
+
+                var item = document.getElementById("name").value;
+                var getvalue = localStorage.getItem("database");
+                if (getvalue) {
+                    var obj = JSON.parse(getvalue);
+                    obj.arr.push(item);
+                    localStorage.setItem("database", JSON.stringify(obj));
+                } else {
+                    localStorage.setItem("database", JSON.stringify({
+                        arr: [item]
+                    }));
+                }
+
+                var item1 = +hr + ":" + min + ":" + sec;
+
+                var getvalue1 = localStorage.getItem("date");
+                if (getvalue1) {
+                    var obj = JSON.parse(getvalue1);
+                    obj.arr.push(item1);
+                    localStorage.setItem("date", JSON.stringify(obj));
+                } else {
+                    localStorage.setItem("date", JSON.stringify({
+                        arr: [item1]
+                    }));
+                }
+                var item2 = document.getElementById("select").value;
+
+                var getvalue2 = localStorage.getItem("data");
+                if (getvalue2) {
+                    var obj = JSON.parse(getvalue2);
+                    obj.arr.push(item2);
+                    localStorage.setItem("data", JSON.stringify(obj));
+                } else {
+                    localStorage.setItem("data", JSON.stringify({
+                        arr: [item2]
+                    }));
+                }
+               
+                var obj21 = {
+                    name: getvalue,
+                    status:getvalue1,
+                    time:getvalue2
+                };
+                var local = localStorage.setItem("database1", JSON.stringify(obj21));
+                this.read();
+            },
+
+            read: function() {
+                var getvalue = localStorage.getItem("database");
+                var getvalue1 = localStorage.getItem("date");
+
+                var getvalue2 = localStorage.getItem("data");
+                // var person = {
+                //     name: (JSON.parse(getvalue)).arr
+                // }
+
+                if (getvalue && getvalue1 && getvalue2) {
+                    var options = "";
+                    for (var i of(JSON.parse(getvalue)).arr) {
+                        var options = "<td>" + i + "</td>"
+
+
+                    }
+
+                    for (var j of(JSON.parse(getvalue1)).arr) {
+                        var options1 = "<td>" + j + "</td>"
+
+
+                    }
+
+                    for (var k of(JSON.parse(getvalue2).arr)) {
+                        var options2 = "<td>" + k + "</td>"
+
+                    }
+                    document.getElementById("table1").innerHTML = "<tr>" + options + options1 + options2 + "</tr>";
+
+
+                }
+                var getvalue4 = localStorage.getItem("database");
+                var getvalue5 = localStorage.getItem("date");
+
+                var getvalue6 = localStorage.getItem("data");
+
+                if (getvalue4 && getvalue5 && getvalue6) {
+                    var options = "";
+                    for (var i of(JSON.parse(getvalue)).arr) {
+                        var options = "<td>" + i + "</td>"
+
+
+                    }
+
+                    for (var j of(JSON.parse(getvalue1)).arr) {
+                        var options1 = "<td>" + j + "</td>"
+
+
+                    }
+
+                    for (var k of(JSON.parse(getvalue2).arr)) {
+                        var options2 = "<td>" + k + "</td>"
+
+                    }
+                    document.getElementById("table1").innerHTML = "<tr>" + options + options1 + options2 + "</tr>";
+
+
+                }
+
+
+
+
+
+            }
+
+
+        }
+
+        document.getElementById("btn_them").addEventListener("click", function() {
+            method.create();
+        });
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./BTVNbuoi10.css">
+  <title>Document</title>
+</head>
+<body>
+  <p id="time"></p>
+  <h1>TODO LIST</h1>
+  <input id="text">
+  <br id="name">
+  <select>
+    <option >Todo</option>
+    <option value="">Done</option> 
+  </select> </br>
+  <table id = "table1" border="1" rules="all" align="center">
+    <thead>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Time</th>
+    </thead>
+    <tbody id="table-tbn"></tbody>
+  </table>
+  <script>
+    
+    function dongho(){
+            var today = new Date();
+			var gio = today.getHours();
+			var phut = today.getMinutes();
+			var giay = today.getSeconds();
+
+			if(gio<10){
+				gio = "0" + gio;
+			}
+			if(phut<10){
+				phut = "0" + phut;
+			}
+			if(giay<10){
+				giay = "0" + giay;
+			}
+			document.getElementById("time").innerHTML = gio + ":" + phut + ":" + giay;
+			setTimeout("dongho()",1000);
+		}
+		dongho();
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<br lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="./BTVNbuoi10.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="time"></div>
+    <h1>TODO LIST.</h1></body> </br>
+    <p>UserName:</p><input id="username"> </body>
+    <button id="add-btn">Add</button>
+        </head>
+        <body>
+        <div class="dropdown">
+          <button class="dropbtn">Lập trình</button>
+          <div class="dropdown-content">
+          <p>todo</p>
+          <p>Done</p>
+          
+          </div>
+        </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Pass</th>
+            </tr>
+        </thead>
+        <tbody id = "body-table"></tbody>
+    </table>
+    <script>
+        //tao dong ho
+       function dongho(){
+            var today = new Date();
+			var gio = today.getHours();
+			var phut = today.getMinutes();
+			var giay = today.getSeconds();
+
+			if(gio<10){
+				gio = "0" + gio;
+			}
+			if(phut<10){
+				phut = "0" + phut;
+			}
+			if(giay<10){
+				giay = "0" + giay;
+			}
+			document.getElementById("time").innerHTML = gio + ":" + phut + ":" + giay;
+			setTimeout("dongho()",1000);
+		}
+		dongho();
+        // tao du lieu va luu du lieu
+        var method = {
+            create: function (){
+            var dropdownmenu = document.getElementsByClassName("dropdown").innerText;
+            var usernameElemnet = document.getElementById("username").value;
+        var person = {
+                name : usernameElemnet,
+                drop: dropdownmenu
+            };
+        var getvalue = localStorage.getItem("database")
+        if(getvalue){
+          var obj = JSON.parse(getvalue);
+          obj.arr.push(item);
+          localStorage.setItem("database",obj);
+        }
+        else{
+          localStorage.setItem("database", JSON.stringify({arr:[person]}));
+        }
+            createTr(person) 
+            this.read();
+        },
+        read:function (){
+            var getvalue = localStorage.getItem("database");
+            document.getElementById("body-table");
+
+        }
+    
+        }
+        // ham tao kieu table
+        function createTr(person){
+        var trElement= document.createElement("tr") 
+       var tdElement1=document.createElement("td")
+       tdElement1.innerHTML= person.name
+       var tdElement2=document.createElement("td")
+       tdElement2.innerHTML= person.drop
+       trElement.appendChild(tdElement1)
+       trElement.appendChild(tdElement2)
+       var tbody = document.getElementById("body-table")
+       tbody.appendChild(trElement)
+       }
+       // gan click
+       document.getElementById("add-btn").addEventListener("click",function(){
+       method.create;
+})
+    </script>
+    
+</body>
+</html>

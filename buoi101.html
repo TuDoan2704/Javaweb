@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<br lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <label for="text">Name:</label>
+  <input id="text">
+  <button id="add">Add</button> </body></br>
+  <ol id="list">
+  </ol>
+  <script>
+    var medthod = {
+      create: function(){
+        var item = document.getElementById("text").value;
+        var getvalue = localStorage.getItem("database")
+        if(getvalue){
+          var obj = JSON.parse(getvalue);
+          obj.arr.push(item);
+          localStorage.setItem("database",obj);
+        }
+        else{
+          localStorage.setItem("database", JSON.stringify({arr:[item]}));
+        }
+
+      },
+      read: function(){
+        var getvalue = localStorage.getItem("database");
+        var option = "";
+        if (getvalue){
+          
+        }
+      },
+      update: function(){
+        
+      },
+      delete: function(){
+        
+      }
+    }
+    document.getElementById("add").addEventListener("click",function(){
+      medthod.create();
+    })
+  </script>
+
+</body>
+</html>
